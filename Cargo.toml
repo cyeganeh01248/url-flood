@@ -1,0 +1,11 @@
+[package]
+name = "url-flood"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.11.24", features = ["blocking"] }
+clap = { version = "4.4.18", features = ["derive", "string"] }
+indicatif = "0.17.7"
