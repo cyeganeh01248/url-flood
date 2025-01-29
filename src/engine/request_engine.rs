@@ -37,7 +37,11 @@ impl Engine {
         let mut handles = Vec::with_capacity(num_threads as usize);
         let start = Instant::now();
         let start_num_requests = self.num_requests.load(Ordering::Acquire);
-        println!("Starting requests...");
+        if self.has_limit {
+            println!("Starting {start_num_requests} requests across {num_threads} threads...");
+        } else {
+            println!("Starting endless requests across {num_threads} threads...");
+        }
 
         for thread_id in 1..=num_threads {
             let thread_request = self.request.clone();
