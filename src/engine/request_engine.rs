@@ -36,7 +36,7 @@ impl Engine {
     pub fn run(&self, num_threads: u16) {
         let mut handles = Vec::with_capacity(num_threads as usize);
         let start = Instant::now();
-        let start_num_requests = self.num_requests.load(Ordering::Relaxed);
+        let start_num_requests = self.num_requests.load(Ordering::Acquire);
         println!("Starting requests...");
 
         for thread_id in 1..=num_threads {
@@ -102,7 +102,7 @@ impl Engine {
         let mut count_failures = 0;
         let mut map = FxHashMap::default();
         loop {
-            if has_limit && num_requests.fetch_sub(1, Ordering::Relaxed) <= 0 {
+            if has_limit && num_requests.fetch_sub(1, Ordering::AcqRel) <= 0 {
                 break;
             }
             let mut client_request = client.get(request_parameters.url.to_url());
