@@ -68,3 +68,6 @@ impl Validate for Header {
         Self::is_valid_key(&self.key).and(Self::is_valid_val(&self.val))
     }
 }
+
+#[cfg(test)]
+mod tests {}

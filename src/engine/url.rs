@@ -41,3 +41,6 @@ impl Validate for URL {
         Self::is_valid_url(&self.url)
     }
 }
+
+#[cfg(test)]
+mod tests {}
