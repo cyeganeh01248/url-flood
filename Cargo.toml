@@ -2,5 +2,12 @@
 name = "url-flood"
 version = "0.1.0"
 edition = "2021"
+documentation = "asdffew"
 
 [dependencies]
+anyhow = "1.0.95"
+clap = { version = "4.5.27", features = ["derive"] }
+regex = "1.11.1"
+serde = { version = "1.0.217", features = ["alloc", "derive"] }
+serde_json = { version = "1.0.138", features = ["alloc"] }
+thiserror = "2.0.11"
