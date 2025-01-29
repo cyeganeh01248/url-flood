@@ -5,7 +5,8 @@ use serde::{Deserialize, Serialize};
 
 use super::traits::Validate;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[allow(clippy::upper_case_acronyms)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct URL {
     url: String,
 }
@@ -19,6 +20,7 @@ impl FromStr for URL {
         })
     }
 }
+
 impl URL {
     pub fn new(url: String) -> anyhow::Result<Self> {
         Self::is_valid_url(&url)?;
@@ -28,6 +30,9 @@ impl URL {
         // TODO
         // URL_REGEX.is_match(url)
         Ok(())
+    }
+    pub fn to_url(&self) -> &str {
+        &self.url
     }
 }
 

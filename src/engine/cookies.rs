@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use std::{fmt::Display, str::FromStr};
 
 use anyhow::{anyhow, Error};
 use serde::{Deserialize, Serialize};
@@ -8,10 +8,10 @@ use super::{
     traits::Validate,
 };
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Cookie {
-    key: String,
-    val: String,
+    pub key: String,
+    pub val: String,
 }
 
 impl FromStr for Cookie {
@@ -35,9 +35,9 @@ impl FromStr for Cookie {
     }
 }
 
-impl ToString for Cookie {
-    fn to_string(&self) -> String {
-        format!("{}={};", self.key, self.val)
+impl Display for Cookie {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}={};", self.key, self.val)
     }
 }
 
